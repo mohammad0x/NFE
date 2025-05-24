@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="توضیحات مربوط به صفحه">
+    <link rel="stylesheet" href="./single.css">
+    <title>Canada</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css ">
+</head>
+<body>
+<nav class="navbar">
+    <ul class="navbar-list">
+        <li class="navbar-item">
+            <a href="#" title="Home">
+                <i class="fas fa-home">Home</i>
+                <span class="sr-only">Home</span>
+            </a>
+        </li>
+        <li class="navbar-item">
+            <a href="./about.html" title="About">
+                <i class="fas fa-info-circle">About</i>
+                <span class="sr-only">About</span>
+            </a>
+        </li>
+        <li class="navbar-item">
+            <a href="#" title="Contact">
+                <i class="fas fa-envelope">Contact</i>
+                <span class="sr-only">Contact</span>
+            </a>
+        </li>
+        <li class="navbar-item">
+            <a href="#" title="Product">
+                <i class="fas fa-box">Product</i>
+                <span class="sr-only">Product</span>
+            </a>
+        </li>
+    </ul>
+    <div class="logo">
+        <img src="https://images.pexels.com/photos/235725/pexels-photo-235725.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2 " alt="Site Logo">
+    </div>
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="Search...">
+        <i class="fas fa-search"></i>
+    </div>
+</nav>
+
+<div class="product-slider-container">
+    <div class="slider-wrapper">
+        <img src="https://images.pexels.com/photos/235725/pexels-photo-235725.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2 " class="slide active" alt="Premium Wheat">
+        <img src="https://images.pexels.com/photos/265216/pexels-photo-265216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2 " class="slide" alt="Field Corn">
+        <img src="https://images.pexels.com/photos/1094544/pexels-photo-1094544.jpeg?auto=compress&cs=tinysrgb&w=600&dpr=2 " class="slide" alt="Barley Only">
+        <img src="https://images.pexels.com/photos/195226/pexels-photo-195226.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2 " class="slide" alt="Rapeseed">
+    </div>
+</div>
+
+<div class="product-details">
+    <h2 class="farm">FARM:</h2>
+    <h2 id="product-title">Premium Wheat</h2>
+    <p id="product-description">Hard and wholesome wheat ideal for milling into flour and baking homemade bread.</p>
+    <div class="rating" id="product-rating">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+    </div>
+    <div id="product-price">7.872$</div>
+    <div class="product-actions">
+        <button class="share-btn">
+            <i class="fas fa-share-alt"></i> Share
+        </button>
+        <button class="save-btn">
+            <i class="fas fa-heart"></i> Save
+        </button>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <div class="footer-top">
+        <div class="footer-logo">
+            <img src="https://images.pexels.com/photos/235725/pexels-photo-235725.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2 " alt="Company Logo">
+            <p>We provide high-quality agricultural products for global markets.</p>
+        </div>
+    </div>
+    <div class="footer-middle">
+        <div class="footer-column">
+            <h3>About Us</h3>
+            <ul>
+                <li><a href="#">Our Company</a></li>
+                <li><a href="#">Team</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">News</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Services</h3>
+            <ul>
+                <li><a href="#">Product Supply</a></li>
+                <li><a href="#">Custom Packaging</a></li>
+                <li><a href="#">Logistics</a></li>
+                <li><a href="#">Quality Control</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Contact</h3>
+            <ul>
+                <li><i class="fas fa-map-marker-alt"></i> Tehran, Iran</li>
+                <li><i class="fas fa-phone"></i> +98 21 1234 5678</li>
+                <li><i class="fas fa-envelope"></i> info@example.com</li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 AgriTrade Co. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </div>
+</footer>
+
+<div class="loader">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    let currentIndex = 0;
+    const productData = [
+        {
+            title: "Premium Wheat",
+            description: "Hard and wholesome wheat ideal for milling into flour and baking homemade bread.",
+            price: "1.200$",
+            rating: "<i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='far fa-star'></i>"
+        },
+        {
+            title: "Field Corn",
+            description: "Pure natural corn, free from additives, used as feed for livestock and poultry.",
+            price: "80.000$",
+            rating: "<i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star-half-alt'></i><i class='far fa-star'></i>"
+        },
+        {
+            title: "Barley Only",
+            description: "Barley produced to standard quality specifications for livestock nutrition.",
+            price: "500$",
+            rating: "<i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i>"
+        },
+        {
+            title: "Rapeseed",
+            description: "Canola seeds with high oil content, ideal for both wholesale and retail markets.",
+            price: "450.000$",
+            rating: "<i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star-half-alt'></i>"
+        }
+    ];
+    function showNextSlide() {
+        slides[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % slides.length;
+        slides[currentIndex].classList.add('active');
+        document.getElementById("product-title").textContent = productData[currentIndex].title;
+        document.getElementById("product-description").textContent = productData[currentIndex].description;
+        document.getElementById("product-price").textContent = productData[currentIndex].price;
+        document.getElementById("product-rating").innerHTML = productData[currentIndex].rating;
+    }
+    slides[currentIndex].classList.add('active');
+    setInterval(showNextSlide, 4000);
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll(".slide-up");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    });
+</script>
+
+<script>
+    window.addEventListener("load", function () {
+        setTimeout(function () {
+            document.querySelector(".loader").style.display = "none";
+        }, 2000);
+    });
+    document.body.classList.add("loaded");
+</script>
+</body>
+</html>
