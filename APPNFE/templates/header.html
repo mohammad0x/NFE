@@ -1,0 +1,918 @@
+<nav class="navbar" dir="ltr">
+    <ul class="navbar-list">
+        <li class="navbar-item">
+            <a href="{% url 'APPNFE:index' %}" title="Home">
+                <i class="fas fa-home">Home </i>
+                <span class="sr-only">Home </span>
+            </a>
+        </li>
+        <li class="navbar-item">
+            <a href="{% url 'APPNFE:about' %}" title="About">
+                <i class="fas fa-info-circle">About</i>
+                <span class="sr-only"> About</span>
+            </a>
+        </li>
+        <li class="navbar-item" >
+            <a href="{% url 'APPNFE:showProduc' %}" title="Product">
+                <i class="fas fa-box">Product</i>
+                <span class="sr-only">Product</span>
+            </a>
+        </li>
+        <li class="navbar-item">
+            <a href="{% url 'APPNFE:contact' %}" title="Contact">
+                <i class="fas fa-envelope">Contact</i>
+                <span class="sr-only">Contact</span>
+            </a>
+        </li>
+    </ul>
+    <div class="logo">
+        <img src="https://www.jowhareh.com/images/Jowhareh/galleries/poster_52ec8369-3d40-4e95-b991-63e1733bbf48.jpeg " alt="Site Logo">
+    </div>
+
+    <form class="d-flex" action="{% url 'APPNFE:SearchResultsView' %}" method="get" role="search">
+      <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn btn-outline-success" type="submit" style="display: none;">Search</button>
+    </form>
+</nav>
+
+<style>
+
+
+        
+@media (max-width: 1281px) {
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+        padding: 0.8rem 0.8rem;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .navbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .logo img {
+        height: 105px;
+        width: 105px;
+        margin-right: 80px; 
+    }
+
+    .navbar-list {
+        gap: 0.5rem; 
+        flex-direction: row;
+        align-items: center;
+        padding: 0 0.6rem;
+    }
+
+    .navbar-item a {
+        padding: 0.4rem 0.8rem; 
+        font-size: 1.2rem;
+    }
+
+    .navbar-item i {
+        font-size: 1.2em;
+    }
+
+    .d-flex {
+        flex-direction: row;
+        margin-left: 0.6rem;
+        position: relative;
+    }
+
+    .form-control {
+        width: 250px;
+        padding: 0.4rem 1.2rem 0.4rem 0.7rem;
+        font-size: 1.2rem;
+        margin-left: -100px;
+    }
+
+    .d-flex::after {
+        right: 8px;
+        font-size: 0.8em;
+    }
+
+    .logo img:hover {
+        transform: scale(1.08);
+        box-shadow: 0 4px 12px rgba(67, 72, 21, 0.521);
+        border-color: #223523;
+    }
+
+    .navbar-item a:hover {
+        color: #ffeb3b;
+    }
+
+    .navbar-item a:hover::after {
+        width: 100%;
+    }
+
+    .form-control:focus {
+        width: 250px;
+        outline: none;
+        border-color: #ffeb3b;
+        box-shadow: 0 0 8px rgba(221, 207, 76, 0.563);
+    }
+
+    .form-control:focus + .btn-outline-success + ::after,
+    .form-control:focus ~ ::after {
+        color: #ffeb3b;
+    }
+}
+
+    
+@media (max-width: 1025px) {
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+        padding: 0.7rem 0.7rem;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .navbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .logo img {
+        height: 90px;
+        width: 90px;
+        margin-right: 80px; 
+    }
+
+    .navbar-list {
+        gap: 0.5rem; 
+        flex-direction: row;
+        align-items: center;
+        padding: 0 0.6rem;
+    }
+
+    .navbar-item a {
+        padding: 0.4rem 0.8rem; 
+        font-size: 1.1rem;
+    }
+
+    .navbar-item i {
+        font-size: 1.1em;
+    }
+
+    .d-flex {
+        flex-direction: row;
+        margin-left: 0.6rem;
+        position: relative;
+    }
+
+    .form-control {
+        width: 200px;
+        padding: 0.4rem 1.2rem 0.4rem 0.7rem;
+        font-size: 1.2rem;
+        margin-left: -100px;
+    }
+
+    .d-flex::after {
+        right: 8px;
+        font-size: 0.8em;
+    }
+
+    .logo img:hover {
+        transform: scale(1.08);
+        box-shadow: 0 4px 12px rgba(67, 72, 21, 0.521);
+        border-color: #223523;
+    }
+
+    .navbar-item a:hover {
+        color: #ffeb3b;
+    }
+
+    .navbar-item a:hover::after {
+        width: 100%;
+    }
+
+    .form-control:focus {
+        width: 200px;
+        outline: none;
+        border-color: #ffeb3b;
+        box-shadow: 0 0 8px rgba(221, 207, 76, 0.563);
+    }
+
+    .form-control:focus + .btn-outline-success + ::after,
+    .form-control:focus ~ ::after {
+        color: #ffeb3b;
+    }
+}
+
+
+
+
+
+
+@media (max-width: 900px) {
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+        padding: 0.5rem 0.5rem;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .navbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .logo img {
+        height: 65px;
+        width: 65px;
+        margin-right: 80px; 
+    }
+
+    .navbar-list {
+        gap: 0.5rem; 
+        flex-direction: row;
+        align-items: center;
+        padding: 0 0.6rem;
+    }
+
+    .navbar-item a {
+        padding: 0.4rem 0.8rem; 
+        font-size: 1.rem;
+    }
+
+    .navbar-item i {
+        font-size: 1em;
+    }
+
+    .d-flex {
+        flex-direction: row;
+        margin-left: 0.5rem;
+        position: relative;
+    }
+
+    .form-control {
+        width: 160px;
+        padding: 0.4rem 1.2rem 0.4rem 0.7rem;
+        font-size: 1.1rem;
+        margin-left: -100px;
+    }
+
+    .d-flex::after {
+        right: 8px;
+        font-size: 0.8em;
+    }
+
+    .logo img:hover {
+        transform: scale(1.08);
+        box-shadow: 0 4px 12px rgba(67, 72, 21, 0.521);
+        border-color: #223523;
+    }
+
+    .navbar-item a:hover {
+        color: #ffeb3b;
+    }
+
+    .navbar-item a:hover::after {
+        width: 100%;
+    }
+
+    .form-control:focus {
+        width: 160px;
+        outline: none;
+        border-color: #ffeb3b;
+        box-shadow: 0 0 8px rgba(221, 207, 76, 0.563);
+    }
+
+    .form-control:focus + .btn-outline-success + ::after,
+    .form-control:focus ~ ::after {
+        color: #ffeb3b;
+    }
+}
+
+
+    @media (max-width: 769px) {
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+        padding: 0.5rem 0.5rem;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .navbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .logo img {
+        height: 55px;
+        width: 55px;
+        margin-right: 40px; 
+    }
+
+    .navbar-list {
+        gap: 0.5rem; 
+        flex-direction: row;
+        align-items: center;
+        padding: 0 0.6rem;
+    }
+
+    .navbar-item a {
+        padding: 0.4rem 0.8rem; 
+        font-size: 1.rem;
+    }
+
+    .navbar-item i {
+        font-size: 1em;
+    }
+
+    .d-flex {
+        flex-direction: row;
+        margin-left: 0.5rem;
+        position: relative;
+    }
+
+    .form-control {
+        width: 140px;
+        padding: 0.4rem 1.2rem 0.4rem 0.7rem;
+        font-size: 1rem;
+        margin-left: -39px;
+    }
+
+    .d-flex::after {
+        right: 8px;
+        font-size: 0.8em;
+    }
+
+    .logo img:hover {
+        transform: scale(1.08);
+        box-shadow: 0 4px 12px rgba(67, 72, 21, 0.521);
+        border-color: #223523;
+    }
+
+    .navbar-item a:hover {
+        color: #ffeb3b;
+    }
+
+    .navbar-item a:hover::after {
+        width: 100%;
+    }
+
+    .form-control:focus {
+        width: 140px;
+        outline: none;
+        border-color: #ffeb3b;
+        box-shadow: 0 0 8px rgba(221, 207, 76, 0.563);
+    }
+
+    .form-control:focus + .btn-outline-success + ::after,
+    .form-control:focus ~ ::after {
+        color: #ffeb3b;
+    }
+}
+
+
+    @media (max-width: 701px) {
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+        padding: 0.5rem 0.5rem;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .navbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .logo img {
+        height: 55px;
+        width: 55px;
+        margin-right: 40px; 
+    }
+
+    .navbar-list {
+        gap: 0.5rem; 
+        flex-direction: row;
+        align-items: center;
+        padding: 0 0.6rem;
+    }
+
+    .navbar-item a {
+        padding: 0.4rem 0.8rem; 
+        font-size: 1.rem;
+    }
+
+    .navbar-item i {
+        font-size: 1em;
+    }
+
+    .d-flex {
+        flex-direction: row;
+        margin-left: 0.5rem;
+        position: relative;
+    }
+
+    .form-control {
+        width: 120px;
+        padding: 0.4rem 1.2rem 0.4rem 0.7rem;
+        font-size: 1rem;
+        margin-left: -39px;
+    }
+
+    .d-flex::after {
+        right: 8px;
+        font-size: 0.8em;
+    }
+
+    .logo img:hover {
+        transform: scale(1.08);
+        box-shadow: 0 4px 12px rgba(67, 72, 21, 0.521);
+        border-color: #223523;
+    }
+
+    .navbar-item a:hover {
+        color: #ffeb3b;
+    }
+
+    .navbar-item a:hover::after {
+        width: 100%;
+    }
+
+    .form-control:focus {
+        width: 120px;
+        outline: none;
+        border-color: #ffeb3b;
+        box-shadow: 0 0 8px rgba(221, 207, 76, 0.563);
+    }
+
+    .form-control:focus + .btn-outline-success + ::after,
+    .form-control:focus ~ ::after {
+        color: #ffeb3b;
+    }
+}
+
+
+
+
+@media (max-width: 600px) {
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+        padding: 0.5rem 0.5rem;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .navbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .logo img {
+        height: 40px;
+        width: 40px;
+        margin-right: 40px; 
+    }
+
+    .navbar-list {
+        gap: 0.2rem; 
+        flex-direction: row;
+        align-items: center;
+        padding: 0 0.6rem;
+    }
+
+    .navbar-item a {
+        padding: 0.2rem 0.4rem; 
+        font-size: 0.75rem;
+    }
+
+    .navbar-item i {
+        font-size: 1em;
+    }
+
+    .d-flex {
+        flex-direction: row;
+        margin-left: 0.4rem;
+        position: relative;
+    }
+
+    .form-control {
+        width: 90px;
+        padding: 0.4rem 1.2rem 0.4rem 0.7rem;
+        font-size: 0.8rem;
+        margin-left: -39px;
+    }
+
+    .d-flex::after {
+        right: 8px;
+        font-size: 0.8em;
+    }
+
+    .logo img:hover {
+        transform: scale(1.08);
+        box-shadow: 0 4px 12px rgba(67, 72, 21, 0.521);
+        border-color: #223523;
+    }
+
+    .navbar-item a:hover {
+        color: #ffeb3b;
+    }
+
+    .navbar-item a:hover::after {
+        width: 100%;
+    }
+
+    .form-control:focus {
+        width: 90px;
+        outline: none;
+        border-color: #ffeb3b;
+        box-shadow: 0 0 8px rgba(221, 207, 76, 0.563);
+    }
+
+    .form-control:focus + .btn-outline-success + ::after,
+    .form-control:focus ~ ::after {
+        color: #ffeb3b;
+    }
+}
+
+
+@media (max-width: 450px) {
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+        padding: 0.4rem 0.2rem;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .navbar::-webkit-scrollbar {
+        display: none;
+    }
+    .navbar-item i {
+        font-size: 0.5em;
+    }
+    .logo img {
+        height: 40px;
+        width: 40px;
+        margin-right: 35px;
+    }
+
+    .navbar-list {
+        gap: 0.2rem;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 0.3rem;
+    }
+
+    .navbar-item a {
+        padding: 0.2rem 0.1rem;
+        font-size: 0.83rem;
+    }
+
+    .navbar-item i {
+        font-size: 0.8em;
+    }
+
+    .d-flex {
+        flex-direction: row;
+        margin-left: 0.3rem;
+        position: relative;
+    }
+
+    .form-control {
+        width: 90px;
+        padding: 0.3rem 1.2rem 0.3rem 0.7rem;
+        font-size: 0.8rem;
+        margin-left: -39px;
+    }
+
+    .d-flex::after {
+        right: 8px;
+        font-size: 0.8em;
+    }
+
+    .logo img:hover {
+        transform: scale(1.08);
+        box-shadow: 0 4px 12px rgba(67, 72, 21, 0.521);
+        border-color: #223523;
+    }
+
+    .navbar-item a:hover {
+        color: #ffeb3b;
+    }
+
+    .navbar-item a:hover::after {
+        width: 100%;
+    }
+
+    .form-control:focus {
+        width: 90px;
+        outline: none;
+        border-color: #ffeb3b;
+        box-shadow: 0 0 8px rgba(221, 207, 76, 0.563);
+    }
+
+    .form-control:focus + .btn-outline-success + ::after,
+    .form-control:focus ~ ::after {
+        color: #ffeb3b;
+    }
+}
+
+@media (max-width: 420px) {
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+        padding: 0.4rem 0.2rem;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .navbar::-webkit-scrollbar {
+        display: none;
+    }
+    .navbar-item i {
+        font-size: 0.5em;
+    }
+    .logo img {
+        height: 40px;
+        width: 40px;
+        margin-right: 35px;
+    }
+
+    .navbar-list {
+        gap: 0.2rem;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 0.3rem;
+    }
+
+    .navbar-item a {
+        padding: 0.2rem 0.1rem;
+        font-size: 0.75rem;
+    }
+
+    .navbar-item i {
+        font-size: 0.8em;
+    }
+
+    .d-flex {
+        flex-direction: row;
+        margin-left: 0.3rem;
+        position: relative;
+    }
+
+    .form-control {
+        width: 88px;
+        padding: 0.3rem 1.2rem 0.3rem 0.7rem;
+        font-size: 0.8rem;
+        margin-left: -39px;
+    }
+
+    .d-flex::after {
+        right: 8px;
+        font-size: 0.8em;
+    }
+
+    .logo img:hover {
+        transform: scale(1.08);
+        box-shadow: 0 4px 12px rgba(67, 72, 21, 0.521);
+        border-color: #223523;
+    }
+
+    .navbar-item a:hover {
+        color: #ffeb3b;
+    }
+
+    .navbar-item a:hover::after {
+        width: 100%;
+    }
+
+    .form-control:focus {
+        width: 88px;
+        outline: none;
+        border-color: #ffeb3b;
+        box-shadow: 0 0 8px rgba(221, 207, 76, 0.563);
+    }
+
+    .form-control:focus + .btn-outline-success + ::after,
+    .form-control:focus ~ ::after {
+        color: #ffeb3b;
+    }
+}
+
+
+
+@media (max-width: 376px) {
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+        padding: 0.4rem 0.2rem;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .navbar::-webkit-scrollbar {
+        display: none;
+    }
+    .navbar-item i {
+        font-size: 0.5em;
+    }
+    .logo img {
+        height: 35px;
+        width: 35px;
+        margin-right: 35px;
+    }
+
+    .navbar-list {
+        gap: 0.2rem;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 0.3rem;
+    }
+
+    .navbar-item a {
+        padding: 0.1rem 0.09rem;
+        font-size: 0.75rem;
+    }
+
+    .navbar-item i {
+        font-size: 0.8em;
+    }
+
+    .d-flex {
+        flex-direction: row;
+        margin-left: 0.3rem;
+        position: relative;
+    }
+
+    .form-control {
+        width: 85px;
+        padding: 0.3rem 1.2rem 0.3rem 0.7rem;
+        font-size: 0.75rem;
+        margin-left: -39px;
+    }
+
+    .d-flex::after {
+        right: 8px;
+        font-size: 0.8em;
+    }
+
+    .logo img:hover {
+        transform: scale(1.08);
+        box-shadow: 0 4px 12px rgba(67, 72, 21, 0.521);
+        border-color: #223523;
+    }
+
+    .navbar-item a:hover {
+        color: #ffeb3b;
+    }
+
+    .navbar-item a:hover::after {
+        width: 100%;
+    }
+
+    .form-control:focus {
+        width: 85px;
+        outline: none;
+        border-color: #ffeb3b;
+        box-shadow: 0 0 8px rgba(221, 207, 76, 0.563);
+    }
+
+    .form-control:focus + .btn-outline-success + ::after,
+    .form-control:focus ~ ::after {
+        color: #ffeb3b;
+    }
+}
+
+
+
+
+
+@media (max-width: 360px) {
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+        padding: 0.4rem 0.2rem;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .navbar::-webkit-scrollbar {
+        display: none;
+    }
+    .navbar-item i {
+        font-size: 0.5em;
+    }
+    .logo img {
+        height: 32px;
+        width: 32px;
+        margin-right: 35px;
+    }
+
+    .navbar-list {
+        gap: 0.2rem;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 0.3rem;
+    }
+
+    .navbar-item a {
+        padding: 0.1rem 0.09rem;
+        font-size: 0.75rem;
+    }
+
+    .navbar-item i {
+        font-size: 0.75em;
+    }
+
+    .d-flex {
+        flex-direction: row;
+        margin-left: 0.3rem;
+        position: relative;
+    }
+
+    .form-control {
+        width: 80px;
+        padding: 0.3rem 1.2rem 0.3rem 0.7rem;
+        font-size: 0.75rem;
+        margin-left: -39px;
+    }
+
+    .d-flex::after {
+        right: 8px;
+        font-size: 0.8em;
+    }
+
+    .logo img:hover {
+        transform: scale(1.08);
+        box-shadow: 0 4px 12px rgba(67, 72, 21, 0.521);
+        border-color: #223523;
+    }
+
+    .navbar-item a:hover {
+        color: #ffeb3b;
+    }
+
+    .navbar-item a:hover::after {
+        width: 100%;
+    }
+
+    .form-control:focus {
+        width: 80px;
+        outline: none;
+        border-color: #ffeb3b;
+        box-shadow: 0 0 8px rgba(221, 207, 76, 0.563);
+    }
+
+    .form-control:focus + .btn-outline-success + ::after,
+    .form-control:focus ~ ::after {
+        color: #ffeb3b;
+    }
+}
+
+</style>

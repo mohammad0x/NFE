@@ -9,25 +9,25 @@
     <link rel="stylesheet" href="{% static 'singlepost.css' %}">
     <title>Product Details</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
- @media (max-width: 768px) { .product-container { width: 100%; max-width: 100%; padding: 0; margin: 0; display: flex; flex-direction: column; } .product-image { width: calc(100% - 20px); height: 200px; margin-left: 20px; margin-right: 0; margin-top: 30px; } .product-image img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px 0 0 0; } .product-details { width: calc(100% - 20px); margin-left: 40px; margin-right: 40px; padding: 15px; border: 1px solid #ddd; border-top: none; border-radius: 0 8px 8px 0; box-sizing: border-box; } .share-container { display: flex; justify-content: space-between; margin-top: 15px; } .action-btn { width: 70px; height: 30px; padding: 0; font-size: 12px; display: flex; align-items: center; justify-content: center; } }
-    </style>
+<style>
+@media (max-width: 768px) { .product-container { width: 100%; max-width: 100%; padding: 0; margin: 0; display: flex; flex-direction: column; } .product-image { width: calc(100% - 20px); height: 200px; margin-left: 20px; margin-right: 0; margin-top: 30px; } .product-image img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px 0 0 0; } .product-details { width: calc(100% - 20px); margin-left: 40px; margin-right: 40px; padding: 15px; border: 1px solid #ddd; border-top: none; border-radius: 0 8px 8px 0; box-sizing: border-box; } .share-container { display: flex; justify-content: space-between; margin-top: 15px; } .action-btn { width: 70px; height: 30px; padding: 0; font-size: 12px; display: flex; align-items: center; justify-content: center; } }
+</style>
 </head>
 <body>
-    {% include 'header.html' %}
+    {% include 'nav.html' %}
 
     <a href="{% url 'APPNFE:chart' single.slug %}">
     <div class="product-container">
         <div class="product-image">
-            <img src="{{ single.img.url }}" alt="{{ single.title }}">
+            <img src="{{ single.img.url }}" alt="{{ single.franceTitle }}">
         </div>
     </a>
         
-        <div class="product-details" >
-            <h1 class="product-title">{{ single.title }}</h1>
+        <div class="product-details">
+            <h1 class="product-title">{{ single.franceTitle }}</h1>
             <span class="product-category">{{ single.slug }}</span>
-            <p class="product-description">{{ single.des }}</p>
-            <!-- <div class="product-price">{{ single.price }}$</div> -->
+            <p class="product-description">{{ single.franceDES }}</p>
+            <!-- <div class="product-price">{{ single.francePrice }}$</div> -->
             
 <div class="share-container" onclick="copyPageUrl()">
     <button class="share-btn action-btn">
@@ -43,10 +43,10 @@
             </div>
         </div>
     </div>
-    <a href="{% url 'APPNFE:single' single.slug %}"><button class="translate-btn">Français</button></a>
+    <a href="{% url 'APPNFE:singlePost' single.slug %}"><button class="translate-btn">ENGLISH</button></a>
 
 
-    {% include 'footer.html' %}
+    {% include 'foot.html' %}
 
 
     <script>
@@ -95,4 +95,3 @@
   
 </body>
 </html>
-

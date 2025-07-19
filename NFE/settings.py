@@ -68,6 +68,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'NFE.wsgi.application'
+AUTH_USER_MODEL = "APPNFE.MyUser"
+
 
 
 # Database

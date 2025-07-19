@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <link rel="stylesheet" href="{% static 'product.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+{% include 'header.html' %}
+<!-- Product List Section -->
+<section class="product-list-container">
+  {% for product in post %}
+  <div class="product-item">
+      <div class="product-image">
+          <img src="{{ product.img.url }}" alt="{{ product.title }}">
+      </div>
+      <div class="product-details">
+          <h2 class="product-title">{{ product.title }}</h2>
+          <p class="product-description">{{ product.des }}</p>
+          <div class="product-meta">
+              <!-- <span class="price">${{ product.price }}</span> -->
+              {% if product.old_price %}
+              <span class="old-price">${{ product.old_price }}</span>
+              {% endif %}
+          </div>
+          <a href="{% url 'APPNFE:singlePost' product.slug %}" class="read-more-btn">Read More</a>
+      </div>
+  </div>
+  {% endfor %}
+</section>
+{% include 'footer.html' %}
+ 
+</body>
+</html>

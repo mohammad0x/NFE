@@ -1,645 +1,216 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Currency Charts</title>
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Product details page">
+    <link rel="stylesheet" href="{% static 'chart.css' %}">
+    <title>Product Details</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #FFD700; /* زرد */
-            --secondary-color: #FFFFFF; /* سفید */
-            --danger-color: #D32F2F;
-            --dark-color: #121212;
-            --light-color: #262626;
-            --text-color: #EEEEEE;
-            --text-light: #BDBDBD;
-            --border-radius: 14px;
-            --box-shadow: 0 8px 24px rgba(255, 215, 0, 0.1);
-            --transition: all 0.4s ease-in-out;
-        }
-    
-        * {
+ body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
-    
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--dark-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding: 0;
-        }
-    
-        .container {
+
+        .chart-section {
+            padding: 20px;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
         }
-    
-        header {
-            background: linear-gradient(135deg, var(--primary-color), #FFA726);
-            color: var(--dark-color);
-            padding: 2rem 0;
-            margin-bottom: 2rem;
-            text-align: center;
-            border-radius: 0 0 var(--border-radius) var(--border-radius);
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-        }
-    
-        header:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 32px rgba(255, 215, 0, 0.2);
-        }
-    
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-    
-        .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-    
-        .chart-section {
-            margin-bottom: 3rem;
-            transition: var(--transition);
-        }
-    
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    
-        .chart-section {
-            animation: fadeIn 0.6s ease-out forwards;
-        }
-    
-        .chart-section:nth-child(2) { animation-delay: 0.1s; }
-        .chart-section:nth-child(3) { animation-delay: 0.2s; }
-        .chart-section:nth-child(4) { animation-delay: 0.3s; }
-    
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: var(--light-color);
-            padding: 1rem 1.5rem;
-            border-radius: var(--border-radius) var(--border-radius) 0 0;
-            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.1);
-            margin-bottom: 1px;
-            transition: var(--transition);
-        }
-    
-        .chart-header:hover {
-            background-color: var(--primary-color);
-            color: var(--dark-color);
-            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.25);
-        }
-    
-        .chart-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--dark-color);
-            transition: var(--transition);
-        }
-    
-        .chart-header:hover .chart-title {
-            color: var(--dark-color);
-        }
-    
-        .chart-container {
+
+        .chart-wrapper {
             width: 100%;
-            height: 500px;
-            background-color: var(--light-color);
-            border-radius: 0 0 var(--border-radius) var(--border-radius);
-            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.1);
+            position: relative;
+            padding-bottom: 62.5%; /* Maintain 16:10 aspect ratio (500/800) */
+            height: 0;
             overflow: hidden;
-            transition: var(--transition);
+            margin-bottom: 20px;
         }
-    
-        .info-card {
-            background-color: var(--light-color);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            box-shadow: var(--box-shadow);
-            border-left: 4px solid var(--primary-color);
-            transition: var(--transition);
+
+        .chart-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            display: block;
+            border: none;
         }
-    
-        .info-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 28px rgba(255, 215, 0, 0.2);
-        }
-    
-        .price-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-    
-        .price-display {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            transition: var(--transition);
-        }
-    
-        .price-change {
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-    
-        .positive {
-            background-color: rgba(255, 215, 0, 0.1);
-            color: var(--primary-color);
-        }
-    
-        .negative {
-            background-color: rgba(211, 47, 47, 0.1);
-            color: var(--danger-color);
-        }
-    
-        .crypto-info {
-            display: flex;
-            margin-bottom: 1.5rem;
-            align-items: center;
-        }
-    
-        .crypto-logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin-right: 1rem;
-            object-fit: cover;
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
-            transition: transform 0.4s ease;
-        }
-    
-        .crypto-logo:hover {
-            transform: rotate(15deg) scale(1.1);
-        }
-    
-        .crypto-details {
-            flex: 1;
-        }
-    
-        .crypto-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-    
-        .crypto-symbol {
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-    
-        .crypto-description {
-            color: var(--text-color);
-            margin-bottom: 1rem;
-        }
-    
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-    
-        .stat-item {
-            background-color: var(--dark-color);
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1);
-            transition: var(--transition);
-        }
-    
-        .stat-item:hover {
-            background-color: var(--primary-color);
-            color: var(--dark-color);
-            transform: translateY(-4px);
-        }
-    
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            margin-bottom: 0.3rem;
-        }
-    
-        .stat-value {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-    
-        .last-updated {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            text-align: right;
-            margin-top: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            transition: var(--transition);
-        }
-    
-        .last-updated i {
-            margin-right: 0.5rem;
-            transition: transform 0.4s ease;
-        }
-    
-        .last-updated:hover i {
-            transform: rotate(180deg);
-        }
-    
-        footer {
+
+        .symbol-title {
             text-align: center;
-            padding: 2rem 0;
-            color: var(--text-light);
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255, 215, 0, 0.1);
-            margin-top: 3rem;
-            transition: var(--transition);
+            margin: 20px 0;
         }
-    
-        footer:hover {
-            color: var(--primary-color);
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 0 10px;
         }
-    
-        @media (max-width: 768px) {
-            .chart-container {
-                height: 400px;
+
+        .data-card {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .data-card i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .data-card span {
+            display: block;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .data-card p {
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .share-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .share-btn {
+            background: #f6d813d3;
+            color: rgb(7, 7, 7);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .share-btn:hover {
+            background: #f4c407e1;
+        }
+
+        .share-tooltip {
+            font-size: 14px;
+        }
+
+        /* Responsive adjustments */
+        @media screen and (max-width: 768px) {
+            .chart-wrapper {
+                padding-bottom: 75%; /* Adjust aspect ratio for tablets */
             }
-    
-            .price-section {
-                flex-direction: column;
-                align-items: flex-start;
+
+            .data-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 10px;
             }
-    
-            .price-change {
-                margin-top: 0.5rem;
+
+            .data-card {
+                padding: 10px;
             }
-    
-            .stats-grid {
+
+            .data-card i {
+                font-size: 20px;
+            }
+
+            .data-card span {
+                font-size: 12px;
+            }
+
+            .data-card p {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .chart-section {
+                padding: 10px;
+            }
+
+            .chart-wrapper {
+                padding-bottom: 100%; /* Adjust for mobile to ensure visibility */
+            }
+
+            .data-grid {
                 grid-template-columns: 1fr;
             }
-        }
-    </style>
+
+            .data-card {
+                padding: 15px;
+            }
+
+            .symbol-title h2 {
+                font-size: 1.5em;
+            }
+        }    </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Crypto Currency Charts</h1>
-            <p class="subtitle">Real-time candlestick charts with market data</p>
+    {% include 'header.html' %}
+    <div class="chart-section">
+        <div class="chart-wrapper">
+            <iframe 
+                src="{{ single.chart }}" 
+                frameborder="0">
+            </iframe>
         </div>
-    </header>
 
-    <main class="container">
-        <section class="chart-section">
-            <div class="chart-header">
-                <h2 class="chart-title">Bitcoin (BTC/USDT)</h2>
-                <div class="price-change positive" id="btc-change">+2.34%</div>
-            </div>
-            <div id="btc-chart" class="chart-container"></div>
-            
-            <div class="info-card">
-                <div class="price-section">
-                    <div class="price-display" id="btc-price">$53,421.78</div>
-                    <div class="price-change positive" id="btc-change-24h">+2.34% (24h)</div>
-                </div>
-                
-                <div class="crypto-info">
-                    <img src="https://wallpapercave.com/wp/wp12661403.jpg" alt="Bitcoin Logo" class="crypto-logo">
-                    <div class="crypto-details">
-                        <div class="crypto-name">Bitcoin</div>
-                        <div class="crypto-symbol">BTC</div>
-                    </div>
-                </div>
-                
-                <div class="crypto-description">
-                    Bitcoin (BTC) is the first decentralized cryptocurrency, created in 2009 by an anonymous person or group using the name Satoshi Nakamoto. 
-                    It enables peer-to-peer transactions without intermediaries. Bitcoin is often referred to as digital gold and has the largest market 
-                    capitalization among cryptocurrencies.
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-label">Market Cap</div>
-                        <div class="stat-value" id="btc-marketcap">$1.02T</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">24h Volume</div>
-                        <div class="stat-value" id="btc-volume">$28.4B</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">All Time High</div>
-                        <div class="stat-value" id="btc-ath">$68,789.63</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Circulating Supply</div>
-                        <div class="stat-value" id="btc-supply">19.3M BTC</div>
-                    </div>
-                </div>
-                
-                <div class="last-updated">
-                    <i class="fas fa-sync-alt"></i>
-                    <span id="btc-updated">Last updated: 12:45:23 PM</span>
-                </div>
-            </div>
-        </section>
+        <div class="symbol-title">
+            <h2>{{ single.symbol }}</h2>
+        </div>
 
-        <section class="chart-section">
-            <div class="chart-header">
-                <h2 class="chart-title">Ethereum (ETH/USDT)</h2>
-                <div class="price-change positive" id="eth-change">+1.56%</div>
-            </div>
-            <div id="eth-chart" class="chart-container"></div>
-            
-            <div class="info-card">
-                <div class="price-section">
-                    <div class="price-display" id="eth-price">$3,210.45</div>
-                    <div class="price-change positive" id="eth-change-24h">+1.56% (24h)</div>
-                </div>
-                
-                <div class="crypto-info">
-                    <img src="https://wallpapercave.com/wp/wp2302899.jpg" alt="Ethereum Logo" class="crypto-logo">
-                    <div class="crypto-details">
-                        <div class="crypto-name">Ethereum</div>
-                        <div class="crypto-symbol">ETH</div>
-                    </div>
-                </div>
-                
-                <div class="crypto-description">
-                    Ethereum (ETH) is a decentralized, open-source blockchain with smart contract functionality. 
-                    Ether is the native cryptocurrency of the platform. Ethereum was proposed in 2013 by programmer Vitalik Buterin 
-                    and has become the foundation for many decentralized applications (dApps) and the DeFi ecosystem.
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-label">Market Cap</div>
-                        <div class="stat-value" id="eth-marketcap">$385.7B</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">24h Volume</div>
-                        <div class="stat-value" id="eth-volume">$14.2B</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">All Time High</div>
-                        <div class="stat-value" id="eth-ath">$4,891.70</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Circulating Supply</div>
-                        <div class="stat-value" id="eth-supply">120.1M ETH</div>
-                    </div>
-                </div>
-                
-                <div class="last-updated">
-                    <i class="fas fa-sync-alt"></i>
-                    <span id="eth-updated">Last updated: 12:45:35 PM</span>
-                </div>
-            </div>
-        </section>
+        <div class="data-grid">
+            <div class="data-card"><i class="fas fa-dollar-sign"></i><span>Price</span><p>{{ single.current_price }}</p></div>
+            <div class="data-card"><i class="fas fa-hourglass-half"></i><span>24h Volume</span><p>{{ single.volume_24h }}</p></div>
+            <div class="data-card"><i class="fas fa-arrow-up"></i><span>Resistance</span><p>{{ single.resistance_level }}$</p></div>
+            <div class="data-card"><i class="fas fa-arrow-down"></i><span>Support</span><p>{{ single.support_level }}</p></div>
+            <div class="data-card"><i class="fas fa-chart-line"></i><span>MA 200</span><p>{{ single.ma_200 }}</p></div>
+            <div class="data-card"><i class="fas fa-exchange-alt"></i><span>24h Change</span><p>{{ single.price_change_24h }}</p></div>
+        </div>
 
-        <section class="chart-section">
-            <div class="chart-header">
-                <h2 class="chart-title">Binance Coin (BNB/USDT)</h2>
-                <div class="price-change negative" id="bnb-change">-0.78%</div>
-            </div>
-            <div id="bnb-chart" class="chart-container"></div>
-            
-            <div class="info-card">
-                <div class="price-section">
-                    <div class="price-display" id="bnb-price">$582.34</div>
-                    <div class="price-change negative" id="bnb-change-24h">-0.78% (24h)</div>
-                </div>
-                
-                <div class="crypto-info">
-                    <img src="https://wallpapers.com/images/high/binance-in-a-circle-oaysjg76lbxrfehf.webp" alt="Binance Coin Logo" class="crypto-logo">
-                    <div class="crypto-details">
-                        <div class="crypto-name">Binance Coin</div>
-                        <div class="crypto-symbol">BNB</div>
-                    </div>
-                </div>
-                
-                <div class="crypto-description">
-                    Binance Coin (BNB) is the cryptocurrency issued by Binance exchange. Initially launched as an ERC-20 token, 
-                    it now runs on Binance Chain. BNB can be used to pay for trading fees on Binance and participate in token sales. 
-                    It also powers the Binance Smart Chain ecosystem.
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-label">Market Cap</div>
-                        <div class="stat-value" id="bnb-marketcap">$89.5B</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">24h Volume</div>
-                        <div class="stat-value" id="bnb-volume">$1.8B</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">All Time High</div>
-                        <div class="stat-value" id="bnb-ath">$686.31</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Circulating Supply</div>
-                        <div class="stat-value" id="bnb-supply">153.8M BNB</div>
-                    </div>
-                </div>
-                
-                <div class="last-updated">
-                    <i class="fas fa-sync-alt"></i>
-                    <span id="bnb-updated">Last updated: 12:45:42 PM</span>
-                </div>
-            </div>
-        </section>
+        <div class="share-container" onclick="copyPageUrl()">
+            <button class="share-btn action-btn">
+                <i class="fas fa-share-alt"></i> 
+                <span class="share-tooltip">Share</span>
+            </button>
+        </div>
+    </div>
 
-        <section class="chart-section">
-            <div class="chart-header">
-                <h2 class="chart-title">Solana (SOL/USDT)</h2>
-                <div class="price-change positive" id="sol-change">+5.23%</div>
-            </div>
-            <div id="sol-chart" class="chart-container"></div>
-            
-            <div class="info-card">
-                <div class="price-section">
-                    <div class="price-display" id="sol-price">$142.67</div>
-                    <div class="price-change positive" id="sol-change-24h">+5.23% (24h)</div>
-                </div>
-                
-                <div class="crypto-info">
-                    <img src="https://wallpapercave.com/wp/wp9800914.jpg" alt="Solana Logo" class="crypto-logo">
-                    <div class="crypto-details">
-                        <div class="crypto-name">Solana</div>
-                        <div class="crypto-symbol">SOL</div>
-                    </div>
-                </div>
-                
-                <div class="crypto-description">
-                    Solana (SOL) is a high-performance blockchain supporting decentralized applications and crypto-currencies. 
-                    It uses a unique proof-of-history (PoH) consensus combined with proof-of-stake (PoS). Solana aims to provide 
-                    fast transaction speeds and low costs, competing with Ethereum as a platform for dApps.
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-label">Market Cap</div>
-                        <div class="stat-value" id="sol-marketcap">$62.3B</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">24h Volume</div>
-                        <div class="stat-value" id="sol-volume">$2.5B</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">All Time High</div>
-                        <div class="stat-value" id="sol-ath">$260.06</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Circulating Supply</div>
-                        <div class="stat-value" id="sol-supply">436.6M SOL</div>
-                    </div>
-                </div>
-                
-                <div class="last-updated">
-                    <i class="fas fa-sync-alt"></i>
-                    <span id="sol-updated">Last updated: 12:45:51 PM</span>
-                </div>
-            </div>
-        </section>
-    </main>
+    {% include 'footer.html' %}
 
-    <footer class="container">
-        <p>Crypto Dashboard &copy; 2023 | Data updates every 10 seconds</p>
-    </footer>
-
-    <script type="text/javascript">
-        const commonSettings = {
-            autosize: true,
-            timezone: "UTC",
-            theme: "light",
-            style: "1",
-            locale: "en",
-            toolbar_bg: "#f1f3f6",
-            enable_publishing: false,
-            hide_top_toolbar: false,
-            hide_side_toolbar: false,
-            allow_symbol_change: true,
-            studies: [
-                "RSI@tv-basicstudies",
-                "MACD@tv-basicstudies",
-                "Volume@tv-basicstudies"
-            ],
-            container_id: ""
-        };
-
-        new TradingView.widget({
-            ...commonSettings,
-            symbol: "BINANCE:BTCUSDT",
-            container_id: "btc-chart"
-        });
-
-        new TradingView.widget({
-            ...commonSettings,
-            symbol: "BINANCE:ETHUSDT",
-            container_id: "eth-chart"
-        });
-
-        new TradingView.widget({
-            ...commonSettings,
-            symbol: "BINANCE:BNBUSDT",
-            container_id: "bnb-chart"
-        });
-
-        new TradingView.widget({
-            ...commonSettings,
-            symbol: "BINANCE:SOLUSDT",
-            container_id: "sol-chart"
-        });
-
-        function generateRealisticChange(previousValue, volatility) {
-            const changePercent = (Math.random() * 2 - 1) * volatility;
-            const newValue = previousValue * (1 + changePercent / 100);
-            return {
-                value: newValue,
-                change: changePercent,
-                isPositive: changePercent >= 0
-            };
+    <script>
+        function copyPageUrl() {
+            const currentUrl = window.location.href;
+            navigator.clipboard.writeText(currentUrl)
+                .then(() => {
+                    alert('Copied! ' + currentUrl);
+                })
+                .catch(err => {
+                    alert('Error ' + err);
+                });
         }
 
-        let btcPrice = 53421.78;
-        let ethPrice = 3210.45;
-        let bnbPrice = 582.34;
-        let solPrice = 142.67;
-
-        function updateMarketData() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString();
-            const dateString = now.toLocaleDateString();
-            
-            const btcUpdate = generateRealisticChange(btcPrice, 1.5);
-            btcPrice = btcUpdate.value;
-            document.getElementById('btc-price').textContent = `$${btcPrice.toFixed(2)}`;
-            document.getElementById('btc-change').textContent = `${btcUpdate.isPositive ? '+' : ''}${btcUpdate.change.toFixed(2)}%`;
-            document.getElementById('btc-change-24h').textContent = `${btcUpdate.isPositive ? '+' : ''}${btcUpdate.change.toFixed(2)}% (24h)`;
-            document.getElementById('btc-marketcap').textContent = `$${(btcPrice * 19300000 / 1000000000).toFixed(1)}B`;
-            document.getElementById('btc-volume').textContent = `$${(28.4 + Math.random() * 5).toFixed(1)}B`;
-            document.getElementById('btc-updated').textContent = `Last updated: ${timeString} ${dateString}`;
-            
-            const ethUpdate = generateRealisticChange(ethPrice, 2);
-            ethPrice = ethUpdate.value;
-            document.getElementById('eth-price').textContent = `$${ethPrice.toFixed(2)}`;
-            document.getElementById('eth-change').textContent = `${ethUpdate.isPositive ? '+' : ''}${ethUpdate.change.toFixed(2)}%`;
-            document.getElementById('eth-change-24h').textContent = `${ethUpdate.isPositive ? '+' : ''}${ethUpdate.change.toFixed(2)}% (24h)`;
-            document.getElementById('eth-marketcap').textContent = `$${(ethPrice * 120100000 / 1000000000).toFixed(1)}B`;
-            document.getElementById('eth-volume').textContent = `$${(14.2 + Math.random() * 3).toFixed(1)}B`;
-            document.getElementById('eth-updated').textContent = `Last updated: ${timeString} ${dateString}`;
-            
-            const bnbUpdate = generateRealisticChange(bnbPrice, 1.2);
-            bnbPrice = bnbUpdate.value;
-            document.getElementById('bnb-price').textContent = `$${bnbPrice.toFixed(2)}`;
-            document.getElementById('bnb-change').textContent = `${bnbUpdate.isPositive ? '+' : ''}${bnbUpdate.change.toFixed(2)}%`;
-            document.getElementById('bnb-change-24h').textContent = `${bnbUpdate.isPositive ? '+' : ''}${bnbUpdate.change.toFixed(2)}% (24h)`;
-            document.getElementById('bnb-marketcap').textContent = `$${(bnbPrice * 153800000 / 1000000000).toFixed(1)}B`;
-            document.getElementById('bnb-volume').textContent = `$${(1.8 + Math.random() * 0.5).toFixed(1)}B`;
-            document.getElementById('bnb-updated').textContent = `Last updated: ${timeString} ${dateString}`;
-            
-            const solUpdate = generateRealisticChange(solPrice, 3);
-            solPrice = solUpdate.value;
-            document.getElementById('sol-price').textContent = `$${solPrice.toFixed(2)}`;
-            document.getElementById('sol-change').textContent = `${solUpdate.isPositive ? '+' : ''}${solUpdate.change.toFixed(2)}%`;
-            document.getElementById('sol-change-24h').textContent = `${solUpdate.isPositive ? '+' : ''}${solUpdate.change.toFixed(2)}% (24h)`;
-            document.getElementById('sol-marketcap').textContent = `$${(solPrice * 436600000 / 1000000000).toFixed(1)}B`;
-            document.getElementById('sol-volume').textContent = `$${(2.5 + Math.random() * 0.8).toFixed(1)}B`;
-            document.getElementById('sol-updated').textContent = `Last updated: ${timeString} ${dateString}`;
-            
-            document.getElementById('btc-change').className = `price-change ${btcUpdate.isPositive ? 'positive' : 'negative'}`;
-            document.getElementById('eth-change').className = `price-change ${ethUpdate.isPositive ? 'positive' : 'negative'}`;
-            document.getElementById('bnb-change').className = `price-change ${bnbUpdate.isPositive ? 'positive' : 'negative'}`;
-            document.getElementById('sol-change').className = `price-change ${solUpdate.isPositive ? 'positive' : 'negative'}`;
-            
-            document.getElementById('btc-change-24h').className = `price-change ${btcUpdate.isPositive ? 'positive' : 'negative'}`;
-            document.getElementById('eth-change-24h').className = `price-change ${ethUpdate.isPositive ? 'positive' : 'negative'}`;
-            document.getElementById('bnb-change-24h').className = `price-change ${bnbUpdate.isPositive ? 'positive' : 'negative'}`;
-            document.getElementById('sol-change-24h').className = `price-change ${solUpdate.isPositive ? 'positive' : 'negative'}`;
-        }
-
-        updateMarketData();
-        
-        setInterval(updateMarketData, 1000);
+        window.addEventListener("load", function () {
+            setTimeout(function () {
+                const loader = document.querySelector(".loader");
+                if (loader) {
+                    loader.style.display = "none";
+                }
+            }, 2000);
+        });
+        document.body.classList.add("loaded");
     </script>
 </body>
 </html>

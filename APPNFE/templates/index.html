@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'home.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>HOME</title>
-<style>
-.translate-btn { position: fixed; left: 20px; bottom: 20px; z-index: 9999; background-color: #000000; color: #FFD700; /* Gold/yellow */ border: 2px solid #FFD700; /* Shape & Size */ padding: 12px 24px; border-radius: 30px; font-size: 16px; font-weight: bold; cursor: pointer; /* Effects */ box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); transition: all 0.3s ease; transform: translateY(0); /* Text styling */ text-transform: uppercase; letter-spacing: 1px; } /* Hover effects */ .translate-btn:hover { background-color: #FFD700; color: #000000; box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5); transform: translateY(-3px); } /* Active/click effect */ .translate-btn:active { transform: translateY(1px); box-shadow: 0 2px 10px rgba(255, 215, 0, 0.5); } /* Animation for attention */ @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); } } /* Add this class with JavaScript if you want a pulsing effect */ .pulse-effect { animation: pulse 1.5s infinite; }
-</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      .translate-btn { position: fixed; left: 20px; bottom: 20px; z-index: 9999; background-color: #000000; color: #FFD700; /* Gold/yellow */ border: 2px solid #FFD700; /* Shape & Size */ padding: 12px 24px; border-radius: 30px; font-size: 16px; font-weight: bold; cursor: pointer; /* Effects */ box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); transition: all 0.3s ease; transform: translateY(0); /* Text styling */ text-transform: uppercase; letter-spacing: 1px; } /* Hover effects */ .translate-btn:hover { background-color: #FFD700; color: #000000; box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5); transform: translateY(-3px); } /* Active/click effect */ .translate-btn:active { transform: translateY(1px); box-shadow: 0 2px 10px rgba(255, 215, 0, 0.5); } /* Animation for attention */ @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); } } /* Add this class with JavaScript if you want a pulsing effect */ .pulse-effect { animation: pulse 1.5s infinite; }
+    </style>
 </head>
 <body>
 
-{% include 'header.html' %}
+{% include 'nav.html' %}
 
 <div class="slider-container" id="new-slider">
     <div class="slides" id="new-slides">
@@ -23,28 +23,28 @@
     </div>
     <div class="dots" id="new-dots"></div>
 </div>
-<a href="{% url 'APPNFE:index' %}"><button class="translate-btn">Français</button></a>
+<a href="{% url 'APPNFE:home' %}"><button class="translate-btn">ENGLISH</button></a>
 
 
 <div class="product-container">
     {% for post in post %}
         <div class="product-card">
             <div class="image-container">
-                <a href="{% url 'APPNFE:singlePost' post.slug %}">
-                    <img src="{{ post.img.url }}" alt="{{ post.title }}"></a>
+                <a href="{% url 'APPNFE:single' post.slug %}">
+                    <img src="{{ post.img.url }}" alt="{{ post.franceTitle }}"></a>
             </div>
             <div class="info">
-                <div class="title">{{ post.title }}</div>
-                <div class="description">{{ post.des|truncatechars:80 }}</div>
+                <div class="title">{{ post.franceTitle }}</div>
+                <div class="description">{{ post.franceDES|truncatechars:80 }}</div>
                 <div class="price-container">
-                    <!-- <div class="price">{{ post.price }}$</div> -->
+                    <!-- <div class="price">{{ post.francePrice }}$</div> -->
                 </div>
             </div>
         </div>
     {% endfor %}
 </div>
 
-{% include 'footer.html' %}
+{% include 'foot.html' %}
 <div class="loader">
     <div class="dot"></div>
     <div class="dot"></div>
