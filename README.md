@@ -31,15 +31,13 @@ This website was built as a custom solution for a Canadian energy company to:
 - Enable easy content updates through an admin dashboard
 - Support future scalability (e.g., e-commerce, multi-language support)
 
-## 📷 Screenshots
 
-*(You can add images/screenshots here)*
 
 ## 🚀 Getting Started (Development)
 
 ```bash
 git clone https://github.com/yourusername/neoflex-energy.git
 cd neoflex-energy
-pip install -r requirements.txt
+pip install django pillow
 python manage.py migrate
 python manage.py runserver
